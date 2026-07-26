@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Filing</title>
+
+  <link rel="stylesheet" href="taskpane.css" />
+
+  <!-- Must be loaded from the CDN, not bundled, per Office.js requirements -->
+  <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+</head>
+<body>
+  <div id="app-loading" class="loading-screen">
+    <div class="spinner" aria-hidden="true"></div>
+    <p>Loading add-in…</p>
+  </div>
+
+  <div id="app-body" class="app-body">
+    <header class="app-header">
+      <div class="app-header__icon" aria-hidden="true">
+        <img src="assets/icon-32.png" width="24" height="24" alt="" />
+      </div>
+      <div>
+        <h1 class="app-header__title">Smart Filing</h1>
+        <p class="app-header__subtitle">Suggested folders for this email</p>
+      </div>
+    </header>
+
+    <main class="app-content" id="app-content">
+      <div id="status-loading" class="status-banner status-banner--info" hidden>
+        <span class="spinner spinner--small" aria-hidden="true"></span>
+        <span id="status-loading-text">Working…</span>
+      </div>
+
+      <div id="status-error" class="status-banner status-banner--error" role="alert" hidden></div>
+      <div id="status-success" class="status-banner status-banner--success" role="status" hidden></div>
+
+      <section id="email-summary" class="card email-summary" hidden>
+        <div class="email-summary__row">
+          <span class="label">From</span>
+          <span id="email-sender" class="value"></span>
+        </div>
+        <div class="email-summary__row">
+          <span class="label">Subject</span>
+          <span id="email-subject" class="value"></span>
+        </div>
+      </section>
+
+      <section id="suggestions-section" hidden>
+        <h2 class="section-title">Suggested folders</h2>
+        <div id="suggestions-list" class="suggestions-list" role="radiogroup" aria-label="Suggested folders"></div>
+      </section>
+
+      <section id="empty-state" class="empty-state" hidden>
+        <p id="empty-state-text"></p>
+      </section>
+
+      <section id="manual-picker-section" hidden>
+        <button id="manual-picker-toggle" class="link-button" type="button" aria-expanded="false">
+          Not seeing the right folder? Choose manually
+        </button>
+        <div id="manual-picker-body" hidden>
+          <select id="manual-folder-select" class="folder-select" aria-label="Choose a folder manually">
+            <option value="" disabled selected>Select a folder…</option>
+          </select>
+        </div>
+      </section>
+
+      <button id="file-button" class="btn btn--primary" disabled type="button">
+        File email
+      </button>
+
+      <p class="disclaimer">
+        Folders are suggested on your device using the subject, sender, and a short preview of the body.
+        No email content leaves your computer.
+      </p>
+    </main>
+  </div>
+
+  <script type="text/javascript" src="taskpane.js"></script>
+</body>
+</html>
